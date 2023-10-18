@@ -1,7 +1,22 @@
+"use client";
+
 import React from "react";
+import { useState, useTransition } from "react";
 import Image from "next/image";
 
+import TabButton from "./TabButton";
+
+import TAB_DATA from "@/data/AboutTabData";
+
 const AboutSection = () => {
+  const [tab, setTab] = useState("Skills");
+  const [isPending, startTransition] = useTransition();
+
+  const handleTabChange = (id) => {
+    startTransition(() => {
+      setTab(id);
+    });
+  };
   return (
     <section className="text-white">
       <div className="md:grid md:grid-cols-2 gap-8 items-center py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
@@ -13,14 +28,36 @@ const AboutSection = () => {
         />
 
         <div>
-          <h2>About Me</h2>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque
-            laborum sequi alias ullam modi voluptas sint eum minus, quo libero
-            sapiente ipsam odit provident, quis numquam. Odio nobis ut harum
-            quasi, tempora veritatis magnam quod eum ea officiis minus, magni
-            quae in modi eveniet, veniam numquam id perferendis dolore maiores?
+          <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
+          <p className="text-base lg:text-lg">
+            {`As a Software Engineer and Full Stack Developer, I've consistently
+            pursued excellence while embracing new learning opportunities. I
+            pride myself on being a team player, as I find working
+            collaboratively with teammates more enjoyable and rewarding than
+            working independently. I possess a strong enthusiasm for
+            implementing innovative solutions in my applications to optimize
+            performance and exceed client expectations.`}
           </p>
+          <div className="flex flex-row mt-8">
+            <TabButton
+              selectTab={() => handleTabChange("skills")}
+              active={tab === "skills"}
+            >
+              Skills
+            </TabButton>
+            <TabButton
+              selectTab={() => handleTabChange("education")}
+              active={tab === "education"}
+            >
+              Education
+            </TabButton>
+            <TabButton
+              selectTab={() => handleTabChange("experience")}
+              active={tab === "experience"}
+            >
+              Expreience
+            </TabButton>
+          </div>
         </div>
       </div>
     </section>
