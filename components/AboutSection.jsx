@@ -9,7 +9,7 @@ import TabButton from "./TabButton";
 import TAB_DATA from "@/data/AboutTabData";
 
 const AboutSection = () => {
-  const [tab, setTab] = useState("Skills");
+  const [tab, setTab] = useState("skills");
   const [isPending, startTransition] = useTransition();
 
   const handleTabChange = (id) => {
@@ -25,9 +25,10 @@ const AboutSection = () => {
           alt="about"
           height={500}
           width={500}
+          priority
         />
 
-        <div>
+        <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
           <p className="text-base lg:text-lg">
             {`As a Software Engineer and Full Stack Developer, I've consistently
@@ -38,7 +39,7 @@ const AboutSection = () => {
             implementing innovative solutions in my applications to optimize
             performance and exceed client expectations.`}
           </p>
-          <div className="flex flex-row mt-8">
+          <div className="flex flex-row justify-start mt-8">
             <TabButton
               selectTab={() => handleTabChange("skills")}
               active={tab === "skills"}
@@ -57,6 +58,9 @@ const AboutSection = () => {
             >
               Expreience
             </TabButton>
+          </div>
+          <div className="mt-8">
+            {TAB_DATA.find((t) => t.id === tab)?.content}
           </div>
         </div>
       </div>

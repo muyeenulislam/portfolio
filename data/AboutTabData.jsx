@@ -22,13 +22,13 @@ const TAB_DATA = [
     id: "education",
     content: (
       <ul className="list-disc pl-2">
-        <li>
+        <li className="py-4 border-b border-purple-500">
           <b>East West University, Dhaka, Bangladesh - B.Sc.</b> (2018 - 2022)
           <br></br>
           <b>Subject:</b> B.Sc. in Computer Science and Engineering (CGPA 3.42
           out of 4)
         </li>
-        <li>
+        <li className="py-4 border-b border-purple-500">
           <b>
             Birshrestha Munshi Abdur Rouf Public College, Dhaka, Bangladesh –
             H.S.C
@@ -37,7 +37,7 @@ const TAB_DATA = [
           <br></br>
           <b>Subject:</b> Science (GPA 4.92 out of 5)
         </li>
-        <li>
+        <li className="py-4">
           <b>Motijheel Govt. Boys’ High School, Dhaka, Bangladesh - S.S.C </b>{" "}
           (2013 - 2015)
           <br></br>
@@ -47,8 +47,8 @@ const TAB_DATA = [
     ),
   },
   {
-    title: "expreince",
-    id: "expreince",
+    title: "Experience",
+    id: "experience",
     content: (
       <ul className="list-disc pl-2">
         <li>AWS Cloud Practitioner</li>
