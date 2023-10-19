@@ -1,87 +1,72 @@
-import React from "react";
+"use client";
+import React, { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
-const projectsData = [
-  {
-    id: 1,
-    title: "Crown Clothing",
-    description: "HTML, CSS, SASS, Styled Components, Reactjs",
-    image: "/images/projects/crownClothing.jpeg",
-    tag: ["All", "Web", "Mobile"],
-    gitUrl: "https://github.com/muyeenulislam/crown-clothing",
-    previewUrl: "https://crown-clothing-muyeen.netlify.app/",
-  },
-  {
-    id: 2,
-    title: "Natours",
-    description:
-      "HTML, CSS, Pug, Javascript, Nodejs (Express) , MongoDB (Mongoose)",
-    image: "/images/projects/natours.jpg",
-    tag: ["All", "Web"],
-    gitUrl: "https://github.com/muyeenulislam/natours",
-    previewUrl: "/",
-  },
-  {
-    id: 3,
-    title: "Forkify",
-    description: "HTML, CSS, Javascript",
-    image: "/images/projects/forkify.jpg",
-    tag: ["All", "Web"],
-    gitUrl: "https://github.com/muyeenulislam/forkify",
-    previewUrl: "https://forkify-muyeen.netlify.app/",
-  },
-  {
-    id: 4,
-    title: "Activity Tracker",
-    description: "HTML, CSS, Javascript",
-    image: "/images/projects/activity.jpg",
-    tag: ["All", "Web"],
-    gitUrl: "https://github.com/muyeenulislam/Activity-Tracker",
-    previewUrl: "https://muyeenulislam.github.io/Activity-Tracker/",
-  },
-  {
-    id: 5,
-    title: "Car Management Service",
-    description: "HTML, CSS, Javascript, PHP, MySQL",
-    image: "/images/projects/cms.jpg",
-    tag: ["All", "Web"],
-    gitUrl: "https://github.com/muyeenulislam/Car-Management-Service",
-    previewUrl: "/",
-  },
-  {
-    id: 6,
-    title: "Pig Game",
-    description: "HTML, CSS, Javascript",
-    image: "/images/projects/pg.jpg",
-    tag: ["All", "Web"],
-    gitUrl: "https://github.com/muyeenulislam/Pig-Game",
-    previewUrl: "https://muyeenulislam.github.io/Pig-Game/",
-  },
-  {
-    id: 7,
-    title: "Guess the Number",
-    description: "HTML, CSS, Javascript",
-    image: "/images/projects/pg.jpg",
-    tag: ["All", "Web"],
-    gitUrl: "https://github.com/muyeenulislam/Guess-the-Number",
-    previewUrl: "https://muyeenulislam.github.io/Guess-the-Number/",
-  },
-  {
-    id: 8,
-    title: "Portfolio v1",
-    description: "HTML, CSS, Javascript, Node.js (Express), MongoDB (Mongoose)",
-    image: "/images/projects/pg.jpg",
-    tag: ["All", "Web", "Mobile"],
-    gitUrl: "https://github.com/muyeenulislam/Guess-the-Number",
-    previewUrl: "https://muyeenulislam.github.io/Guess-the-Number/",
-  },
-];
+import ProjectCard from "./ProjectCard";
+import ProjectTag from "./ProjectTag";
+import ProjectsData from "./ProjectsData";
 
 const ProjectSection = () => {
+  const [tag, setTag] = useState("All");
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  const handleTagChange = (newTag) => {
+    setTag(newTag);
+  };
+
+  const filteredProjects = ProjectsData?.filter((project) =>
+    project.tag.includes(tag)
+  );
+
+  const cardVariants = {
+    initial: { y: 50, opacity: 0 },
+    animate: { y: 0, opacity: 1 },
+  };
+
   return (
-    <div>
-      <h2>My Projects</h2>
-      <div></div>
-    </div>
+    <section id="projects">
+      <h2 className="text-center text-4xl font-bold text-white mt-4 mb-8 md:mb-12">
+        My Projects
+      </h2>
+      <div className="text-white flex flex-row justify-center items-center gap-2 py-6">
+        <ProjectTag
+          onClick={handleTagChange}
+          name="All"
+          isSelected={tag === "All"}
+        />
+        <ProjectTag
+          onClick={handleTagChange}
+          name="Web"
+          isSelected={tag === "Web"}
+        />
+        <ProjectTag
+          onClick={handleTagChange}
+          name="Mobile"
+          isSelected={tag === "Mobile"}
+        />
+      </div>
+      <ul ref={ref} className="grid md:grid-cols-3 gap-8 md:gap-12">
+        {filteredProjects.map((project, index) => (
+          <motion.li
+            key={index}
+            variants={cardVariants}
+            initial="initial"
+            animate={isInView ? "animate" : "initial"}
+            transition={{ duration: 0.3, delay: index * 0.4 }}
+          >
+            <ProjectCard
+              key={project.id}
+              title={project.title}
+              description={project.description}
+              imgUrl={project.image}
+              gitUrl={project.gitUrl}
+              previewUrl={project.previewUrl}
+            />
+          </motion.li>
+        ))}
+      </ul>
+    </section>
   );
 };
 
