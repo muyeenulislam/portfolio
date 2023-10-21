@@ -6,14 +6,6 @@ import ProjectCard from "./ProjectCard";
 import ProjectTag from "./ProjectTag";
 import ProjectsData from "./ProjectsData";
 
-import dynamic from "next/dynamic";
-
-const Carousel = dynamic(() => import("@brainhubeu/react-carousel"), {
-  ssr: false,
-});
-
-import "@brainhubeu/react-carousel/lib/style.css";
-
 const ProjectSection = () => {
   const [tag, setTag] = useState("All");
   const ref = useRef(null);
@@ -54,7 +46,7 @@ const ProjectSection = () => {
           isSelected={tag === "Mobile"}
         />
       </div>
-      {/* <ul ref={ref} className="grid md:grid-cols-3 gap-8 md:gap-12">
+      <ul ref={ref} className="grid md:grid-cols-3 gap-8 md:gap-12">
         {filteredProjects.map((project, index) => (
           <motion.li
             key={index}
@@ -73,27 +65,7 @@ const ProjectSection = () => {
             />
           </motion.li>
         ))}
-      </ul> */}
-
-      <Carousel
-        slidesPerPage={3}
-        slidesPerScroll={1}
-        offset={75}
-        itemWidth={250}
-        arrow
-        centered
-      >
-        {filteredProjects.map((project, index) => (
-          <ProjectCard
-            key={project.id}
-            title={project.title}
-            description={project.description}
-            imgUrl={project.image}
-            gitUrl={project.gitUrl}
-            previewUrl={project.previewUrl}
-          />
-        ))}
-      </Carousel>
+      </ul>
     </section>
   );
 };
