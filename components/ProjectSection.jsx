@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import ProjectCard from "./ProjectCard";
 import ProjectTag from "./ProjectTag";
-import ProjectsData from "./ProjectsData";
+import ProjectsData from "@/data/ProjectsData";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
