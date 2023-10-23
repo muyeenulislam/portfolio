@@ -2,7 +2,7 @@ const ProjectsData = [
   {
     id: 1,
     title: "Crown Clothing",
-    description: "HTML, CSS, SASS, Styled Components, Reactjs",
+    description: "HTML, CSS, SCSS, Styled Components, Reactjs, Firebase",
     image: "/images/projects/crownClothing.jpeg",
     tag: ["All", "Web", "Mobile"],
     gitUrl: "https://github.com/muyeenulislam/crown-clothing",

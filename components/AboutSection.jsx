@@ -33,14 +33,8 @@ const AboutSection = () => {
         />
 
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
-          <p className="text-base lg:text-lg">
-            {`As a Software Engineer and Full Stack Developer, I've consistently
-            pursued excellence while embracing new learning opportunities. I
-            pride myself on being a team player, as I find working
-            collaboratively with teammates more enjoyable and rewarding than
-            working independently. I possess a strong enthusiasm for
-            implementing innovative solutions in my applications to optimize
-            performance and exceed client expectations.`}
+          <p className="text-base lg:text-lg text-justify">
+            {`As a Software Engineer and Full Stack Developer, I've consistently pursued excellence while embracing new learning opportunities. I consider myself as a team player and I find working collaboratively with teammates more enjoyable than working independently. I possess a strong enthusiasm for implementing innovative solutions in my applications to optimize performance.`}
           </p>
           <div className="flex flex-row justify-start mt-8">
             <TabButton

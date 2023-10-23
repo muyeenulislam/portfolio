@@ -4,13 +4,14 @@ import React from "react";
 import Image from "next/image";
 
 import { TypeAnimation } from "react-type-animation";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
     <section>
-      <div className="grid grid-cols-1 sm:grid-cols-12">
-        <div className="col-span-7 place-self-center text-center sm:text-left">
-          <h1 className="text-white mb-4 text-4xl sm:text-5xl lg:text-6xl font-extrabold">
+      <div className="grid grid-cols-1 sm:grid-cols-12 items-center">
+        <div className="col-span-7 text-left sm:text-left">
+          <h1 className="text-white h-[130px] mb-4 text-4xl sm:text-5xl lg:text-6xl font-extrabold">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
               Hello, I am{" "}
             </span>
@@ -29,16 +30,17 @@ const HeroSection = () => {
               repeat={Infinity}
             />
           </h1>
-          <p className="text-[#ADB7BE] text-base sm:text-lg lg:text-xl mb-6">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae
-            voluptate praesentium
-          </p>
+
           <div>
             <button className="px-6 py-3 w-full sm:w-fit rounded-full mr-4 bg-gradient-to-br from-blue-500 via-primary-500 to-secondary-500 hover:bg-slate-200 text-white">
-              Hire Me
-            </button>
-            <button className="px-6 py-3 w-full sm:w-fit rounded-full mr-4 bg-transparent hover:bg-slate-800 text-white border border-white mt-3">
-              Download CV
+              <Link
+                href={
+                  "https://drive.google.com/file/d/1Jvmz_kUKxaw28_75rO-fCmPOW4rdO-g_/view?usp=sharing"
+                }
+                target="_blank"
+              >
+                Download CV
+              </Link>
             </button>
           </div>
         </div>
