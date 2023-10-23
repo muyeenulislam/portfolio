@@ -71,16 +71,19 @@ const EmailSection = () => {
             say hi, I will try my best to get back to you!
           </p>
           <div className="socials flex flex-row gap-2">
-            <Link href="https://www.facebook.com/sakif.kun">
+            <Link href="https://www.facebook.com/sakif.kun" target="_blank">
               <BsFacebook className="text-2xl hover:text-purple-600 mr-2" />
             </Link>
-            <Link href="https://github.com/muyeenulislam">
+            <Link href="https://github.com/muyeenulislam" target="_blank">
               <BsGithub className="text-2xl hover:text-purple-600 mx-2" />
             </Link>
-            <Link href="https://www.linkedin.com/in/md-muyeen-ul-islam/">
+            <Link
+              href="https://www.linkedin.com/in/md-muyeen-ul-islam/"
+              target="_blank"
+            >
               <BsLinkedin className="text-2xl hover:text-purple-600 mx-2" />
             </Link>
-            <Link href="https://www.instagram.com/sakif.kun/">
+            <Link href="https://www.instagram.com/sakif.kun/" target="_blank">
               <BsInstagram className="text-2xl hover:text-purple-600 mx-2" />
             </Link>
           </div>
