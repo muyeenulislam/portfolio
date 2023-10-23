@@ -22,8 +22,8 @@ const TAB_DATA = [
     id: "education",
     content: (
       <ul className="list-disc pl-2">
-        <li className="py-4 border-b border-purple-500">
-          <b className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+        <li className="py-4 border-b border-primary-500">
+          <b className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
             East West University, Dhaka, Bangladesh - B.Sc.
           </b>{" "}
           (2018 - 2022)
@@ -31,8 +31,8 @@ const TAB_DATA = [
           <b>Subject:</b> B.Sc. in Computer Science and Engineering (CGPA 3.42
           out of 4)
         </li>
-        <li className="py-4 border-b border-purple-500">
-          <b className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+        <li className="py-4 border-b border-primary-500">
+          <b className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
             Birshrestha Munshi Abdur Rouf Public College, Dhaka, Bangladesh –
             H.S.C
           </b>{" "}
@@ -41,7 +41,7 @@ const TAB_DATA = [
           <b>Subject:</b> Science (GPA 4.92 out of 5)
         </li>
         <li className="py-4">
-          <b className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+          <b className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
             Motijheel Govt. Boys’ High School, Dhaka, Bangladesh - S.S.C{" "}
           </b>{" "}
           (2013 - 2015)
@@ -56,9 +56,9 @@ const TAB_DATA = [
     id: "experience",
     content: (
       <ul className="list-disc pl-2">
-        <li className="py-4 border-b border-purple-500">
+        <li className="py-4 border-b border-primary-500">
           <div
-            className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600"
+            className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600"
             style={{ fontSize: "25px" }}
           >
             Full Stack Developer
@@ -70,7 +70,7 @@ const TAB_DATA = [
         </li>
         <li className="py-4 ">
           <div
-            className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600"
+            className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600"
             style={{ fontSize: "25px" }}
           >
             Full Stack Developer
