@@ -45,13 +45,29 @@ const ProjectSection = () => {
       </div>
 
       <Swiper
-        slidesPerView={3}
+        slidesPerView={1}
         spaceBetween={30}
         pagination={{
           clickable: true,
         }}
         modules={[Pagination]}
+        breakpoints={{
+          800: {
+            slidesPerView: 2,
+          },
+
+          1400: {
+            slidesPerView: 3,
+          },
+        }}
         className="mySwiper"
+        style={{
+          "--swiper-pagination-color": "violet",
+          "--swiper-pagination-bullet-inactive-color": "#999999",
+          "--swiper-pagination-bullet-inactive-opacity": "1",
+          "--swiper-pagination-bullet-size": "16px",
+          "--swiper-pagination-bullet-horizontal-gap": "6px",
+        }}
       >
         {filteredProjects.map((project, index) => (
           <div key={index}>
