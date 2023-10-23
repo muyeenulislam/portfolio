@@ -10,18 +10,31 @@ const EmailSection = () => {
   const [submitText, setSubmitText] = useState("Send Message");
   const [disabled, setDisabled] = useState(false);
 
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+
+  const resetValues = () => {
+    setEmail("");
+    setSubject("");
+    setMessage("");
+    setSubmitText("Send Message");
+    setDisabled(false);
+  };
+
   const handleSubmit = async (e) => {
     setSubmitText("Sending ...");
     setDisabled(true);
+
     e.preventDefault();
+
     const data = {
-      email: e.target.email.value,
-      subject: e.target.subject.value,
-      message: `From: ${e.target.email.value},\n${e.target.message.value}`,
+      email: email,
+      subject: subject,
+      message: `From: ${email},\n${subject}`,
     };
 
     const JSONdata = JSON.stringify(data);
-    const endpoint = "/api/send";
 
     const options = {
       method: "POST",
@@ -31,7 +44,7 @@ const EmailSection = () => {
       body: JSONdata,
     };
 
-    const response = await fetch(endpoint, options);
+    const response = await fetch("/api/send", options);
     const resData = await response.json();
 
     if (response.status === 200) {
@@ -40,8 +53,7 @@ const EmailSection = () => {
         setEmailSubmitted(false);
       }, 2000);
     }
-    setSubmitText("Send Message");
-    setDisabled(false);
+    resetValues();
   };
 
   return (
@@ -86,6 +98,8 @@ const EmailSection = () => {
                 required
                 className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
                 placeholder="jacob@google.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="mb-6">
@@ -102,6 +116,8 @@ const EmailSection = () => {
                 required
                 className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
                 placeholder="Just saying hi"
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
               />
             </div>
             <div className="mb-6">
@@ -116,6 +132,8 @@ const EmailSection = () => {
                 id="message"
                 className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
                 placeholder="Let's talk about..."
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
               />
             </div>
             {emailSubmitted && (
