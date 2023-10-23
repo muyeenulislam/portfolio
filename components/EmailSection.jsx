@@ -32,7 +32,7 @@ const EmailSection = () => {
     const data = {
       email: email,
       subject: subject,
-      message: `From: ${email},\n${subject}`,
+      message: `From: ${email},\n${message}`,
     };
 
     const JSONdata = JSON.stringify(data);
