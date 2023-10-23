@@ -68,9 +68,9 @@ const ProjectSection = () => {
           "--swiper-pagination-bullet-horizontal-gap": "6px",
         }}
       >
-        {filteredProjects.map((project, index) => (
-          <div key={index}>
-            <SwiperSlide>
+        {filteredProjects.map((project) => (
+          <div key={project.id}>
+            <SwiperSlide key={project.id}>
               <ProjectCard
                 key={project.id}
                 title={project.title}
