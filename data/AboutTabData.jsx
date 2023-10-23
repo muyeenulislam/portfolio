@@ -13,7 +13,7 @@ const TAB_DATA = [
         <li>{`MySQL | (MongoDB, Mongoose)`}</li>
         <li>Stripe</li>
         <li>bKash</li>
-        <li>{`Linus (Ubuntu)`}</li>
+        <li>{`Linux (Ubuntu)`}</li>
       </ul>
     ),
   },
