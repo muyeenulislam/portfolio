@@ -57,11 +57,11 @@ const EmailSection = () => {
   };
 
   return (
-    <section className="my-8 md:my-8 py-20" id="contact">
-      <h2 className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600 mb-12">
+    <section className="my-8 md:my-8" id="contact">
+      <h2 className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600 mt-8">
         Contact
       </h2>
-      <div className="grid md:grid-cols-2 gap-4 relative">
+      <div className="grid md:grid-cols-2 gap-4 relative py-8 sm:py-16">
         <div>
           <h5 className="text-xl font-bold text-white my-2">
             Let&apos;s Connect
