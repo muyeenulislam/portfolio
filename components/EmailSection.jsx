@@ -72,19 +72,19 @@ const EmailSection = () => {
           </p>
           <div className="socials flex flex-row gap-2">
             <Link href="https://www.facebook.com/sakif.kun" target="_blank">
-              <BsFacebook className="text-2xl hover:text-purple-600 mr-2" />
+              <BsFacebook className="text-2xl hover:text-primary-600 mr-2 hover:scale-105 transition ease-in-out" />
             </Link>
             <Link href="https://github.com/muyeenulislam" target="_blank">
-              <BsGithub className="text-2xl hover:text-purple-600 mx-2" />
+              <BsGithub className="text-2xl hover:text-primary-600 mx-2 hover:scale-105 transition ease-in-out" />
             </Link>
             <Link
               href="https://www.linkedin.com/in/md-muyeen-ul-islam/"
               target="_blank"
             >
-              <BsLinkedin className="text-2xl hover:text-purple-600 mx-2" />
+              <BsLinkedin className="text-2xl hover:text-primary-600 mx-2 hover:scale-105 transition ease-in-out" />
             </Link>
             <Link href="https://www.instagram.com/sakif.kun/" target="_blank">
-              <BsInstagram className="text-2xl hover:text-purple-600 mx-2" />
+              <BsInstagram className="text-2xl hover:text-primary-600 mx-2 hover:scale-105 transition ease-in-out" />
             </Link>
           </div>
         </div>
@@ -102,7 +102,7 @@ const EmailSection = () => {
                 type="email"
                 id="email"
                 required
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
+                className="bg-secondary-950 border border-[#33353F] placeholder-white text-gray-100 text-sm rounded-lg block w-full p-2.5"
                 placeholder="jacob@google.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -120,7 +120,7 @@ const EmailSection = () => {
                 type="text"
                 id="subject"
                 required
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
+                className="bg-secondary-950 border border-[#33353F] placeholder-white text-gray-100 text-sm rounded-lg block w-full p-2.5"
                 placeholder="Just saying hi"
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
@@ -136,7 +136,7 @@ const EmailSection = () => {
               <textarea
                 name="message"
                 id="message"
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
+                className="bg-secondary-950 border border-[#33353F] placeholder-white text-gray-100 text-sm rounded-lg block w-full p-2.5"
                 placeholder="Let's talk about..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
@@ -149,7 +149,7 @@ const EmailSection = () => {
             )}
             <button
               type="submit"
-              className="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2.5 px-5 rounded-lg w-full"
+              className="bg-primary-700 hover:bg-primary-900 text-white font-medium py-2.5 px-5 rounded-lg w-full"
               disabled={disabled}
             >
               {submitText}

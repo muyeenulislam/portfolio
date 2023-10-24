@@ -61,7 +61,7 @@ const ProjectSection = () => {
           }}
           className="mySwiper "
           style={{
-            "--swiper-pagination-color": "violet",
+            "--swiper-pagination-color": "#085855",
             "--swiper-pagination-bullet-inactive-color": "#999999",
             "--swiper-pagination-bullet-inactive-opacity": "1",
             "--swiper-pagination-bullet-size": "12px",

@@ -26,16 +26,32 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+/* popup animation */
+@keyframes slide-down {
+  from {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0); /* Adjust as needed */
+    opacity: 1;
+  }
+}
+
+.open {
+  animation: slide-down 0.3s ease-in-out forwards;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #121212;
+  background: #030e0f;
 }
 ::-webkit-scrollbar-thumb {
-  background: #494949;
+  background: #04362a;
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #494949;
+  background: #04362a;
 }
