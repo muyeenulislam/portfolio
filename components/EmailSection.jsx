@@ -2,14 +2,13 @@
 import React, { useState } from "react";
 
 import Link from "next/link";
-import Image from "next/image";
 
 import { BsFacebook, BsGithub, BsLinkedin, BsInstagram } from "react-icons/bs";
 
 const EmailSection = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [submitText, setSubmitText] = useState("Send Message");
-  const [disabled, setDisabled] = useState(false);
+  const [isDisabled, setDisabled] = useState(false);
 
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -32,7 +31,7 @@ const EmailSection = () => {
     const data = {
       email: email,
       subject: subject,
-      message: `From: ${email},\n${message}`,
+      message: `From: ${email},\nMessage: ${message}`,
     };
 
     const JSONdata = JSON.stringify(data);
@@ -150,7 +149,7 @@ const EmailSection = () => {
             <button
               type="submit"
               className="bg-primary-700 hover:bg-primary-900 text-white font-medium py-2.5 px-5 rounded-lg w-full"
-              disabled={disabled}
+              disabled={isDisabled}
             >
               {submitText}
             </button>
