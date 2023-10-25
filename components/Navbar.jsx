@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
@@ -17,6 +18,13 @@ const navLinks = [
 
 const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
+  const [hash, setHash] = useState("");
+  const params = useParams();
+
+  useEffect(() => {
+    setHash(window.location.hash);
+  }, [params]);
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-10 bg-[#030e0f] bg-opacity-100">
       <div className="flex flex-wrap items-center justify-between mx-auto px-8 py-4">
@@ -51,7 +59,11 @@ const Navbar = () => {
           <ul className="flex  p-4 md:p-0 md:flex-row md:space-x-8 mt-0">
             {navLinks.map((navLink) => (
               <li key={navLink.title}>
-                <Navlink href={navLink.href} title={navLink.title} />
+                <Navlink
+                  href={navLink.href}
+                  title={navLink.title}
+                  active={hash === navLink.href ? true : false}
+                />
               </li>
             ))}
           </ul>
