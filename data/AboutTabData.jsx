@@ -23,7 +23,10 @@ const TAB_DATA = [
     content: (
       <ul className="list-disc pl-2">
         <li className="py-4 border-b border-primary-500">
-          <b className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
+          <b
+            className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600"
+            style={{ fontSize: "20px" }}
+          >
             East West University, Dhaka, Bangladesh - B.Sc.
           </b>{" "}
           (2018 - 2022)
@@ -32,7 +35,10 @@ const TAB_DATA = [
           out of 4)
         </li>
         <li className="py-4 border-b border-primary-500">
-          <b className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
+          <b
+            className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600"
+            style={{ fontSize: "20px" }}
+          >
             Birshrestha Munshi Abdur Rouf Public College, Dhaka, Bangladesh –
             H.S.C
           </b>{" "}
@@ -41,7 +47,10 @@ const TAB_DATA = [
           <b>Subject:</b> Science (GPA 4.92 out of 5)
         </li>
         <li className="py-4">
-          <b className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
+          <b
+            className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600"
+            style={{ fontSize: "20px" }}
+          >
             Motijheel Govt. Boys’ High School, Dhaka, Bangladesh - S.S.C{" "}
           </b>{" "}
           (2013 - 2015)

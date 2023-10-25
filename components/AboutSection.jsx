@@ -3,6 +3,9 @@
 import React from "react";
 import { useState, useTransition } from "react";
 import Image from "next/image";
+import Link from "next/link";
+
+import { BsFacebook, BsGithub, BsLinkedin, BsInstagram } from "react-icons/bs";
 
 import TabButton from "./TabButton";
 
@@ -36,7 +39,24 @@ const AboutSection = () => {
           <p className="text-base lg:text-lg text-justify">
             {`As a Software Engineer and Full Stack Developer, I've consistently pursued excellence while embracing new learning opportunities. I consider myself as a team player and I find working collaboratively with teammates more enjoyable than working independently. I possess a strong enthusiasm for implementing innovative solutions in my applications to optimize performance.`}
           </p>
-          <div className="flex flex-row justify-start mt-8">
+          <div className="socials flex flex-row gap-2 my-4">
+            <Link href="https://www.facebook.com/sakif.kun" target="_blank">
+              <BsFacebook className="text-2xl hover:text-primary-600 mr-2 hover:scale-105 transition ease-in-out" />
+            </Link>
+            <Link href="https://github.com/muyeenulislam" target="_blank">
+              <BsGithub className="text-2xl hover:text-primary-600 mx-2 hover:scale-105 transition ease-in-out" />
+            </Link>
+            <Link
+              href="https://www.linkedin.com/in/md-muyeen-ul-islam/"
+              target="_blank"
+            >
+              <BsLinkedin className="text-2xl hover:text-primary-600 mx-2 hover:scale-105 transition ease-in-out" />
+            </Link>
+            <Link href="https://www.instagram.com/sakif.kun/" target="_blank">
+              <BsInstagram className="text-2xl hover:text-primary-600 mx-2 hover:scale-105 transition ease-in-out" />
+            </Link>
+          </div>
+          <div className="flex flex-row justify-start mt-5">
             <TabButton
               selectTab={() => handleTabChange("skills")}
               active={tab === "skills"}
