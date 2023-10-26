@@ -30,6 +30,26 @@ body {
   scroll-behavior: smooth;
 }
 
+.btn-primary-selected {
+  background: #042f2e;
+  color: white;
+  box-shadow: inset 300px 0 0 0 #042f2e;
+  transition: ease-in-out 0.6s;
+}
+
+.btn-primary:hover {
+  background: #fcfcfc;
+  color: #095855;
+  box-shadow: inset 300px 0 0 0 #fcfcfc;
+  transition: ease-in-out 0.6s;
+}
+.btn-submit:hover {
+  background: #fcfcfc;
+  color: #095855;
+  box-shadow: inset 800px 0 0 0 #fcfcfc;
+  transition: ease-in-out 0.7s;
+}
+
 @keyframes slide-down {
   from {
     transform: translateY(0);
