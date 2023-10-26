@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="footer z-10 border-t-[#33353F] border-l-transparent border-r-transparent border-b-transparent text-white flex justify-center">
       <div className="container p-6 sm:p-12 flex justify-between">
-        <div className="flex items-center ">
+        <div className="flex items-center p-3">
           <Image
             className="rounded-full"
             src={"/images/navIcon.jpg"}
@@ -14,12 +14,12 @@ const Footer = () => {
             width={50}
           />
         </div>
-        <div className="text-slate-600 flex items-center p-3 text-sm sm:text-base">
+        <div className="text-slate-600 text-center flex items-center p-3 text-sm sm:text-base">
           Copyright © Md. Muyeen - Ul - Islam {new Date().getFullYear()}.
         </div>
-        <p className="text-slate-600 flex items-center text-sm sm:text-base">
+        <div className="text-slate-600 flex items-center text-right text-sm sm:text-base">
           All rights reserved.
-        </p>
+        </div>
       </div>
     </div>
   );
