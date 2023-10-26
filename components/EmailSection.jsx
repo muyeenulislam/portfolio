@@ -102,7 +102,7 @@ const EmailSection = () => {
                 id="email"
                 required
                 className="bg-secondary-950 border border-[#33353F] placeholder-white text-gray-100 text-sm rounded-lg block w-full p-2.5"
-                placeholder="jacob@google.com"
+                placeholder="example@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
