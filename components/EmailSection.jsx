@@ -1,7 +1,9 @@
 "use client";
 import React, { useState } from "react";
-
 import Link from "next/link";
+import Lottie from "react-lottie-player";
+
+import hiAnimation from "../public/hiAnimation.json";
 
 import { BsFacebook, BsGithub, BsLinkedin, BsInstagram } from "react-icons/bs";
 
@@ -85,6 +87,14 @@ const EmailSection = () => {
             <Link href="https://www.instagram.com/sakif.kun/" target="_blank">
               <BsInstagram className="text-2xl hover:text-primary-600 mx-2 hover:scale-105 transition ease-in-out" />
             </Link>
+          </div>
+          <div className="flex items-center justify-center">
+            <Lottie
+              loop
+              animationData={hiAnimation}
+              play
+              style={{ width: 250, height: 250 }}
+            />
           </div>
         </div>
         <div>
