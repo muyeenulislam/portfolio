@@ -3,7 +3,7 @@ const TAB_DATA = [
     title: "Skills",
     id: "skills",
     content: (
-      <ul className="list-disc pl-2">
+      <ul className="pl-2" style={{ listStyle: "disc" }}>
         <li>HTML | CSS | Tailwind CSS</li>
         <li>Javascript</li>
         <li>{`Node.js (Express)`}</li>
