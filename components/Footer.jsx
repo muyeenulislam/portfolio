@@ -12,6 +12,10 @@ const Footer = () => {
           height={50}
           width={50}
         />
+        <div className="text-slate-600 flex items-center">
+          Copyright © Md. Muyeen - Ul - Islam {new Date().getFullYear()}. All
+          Rights Reserved
+        </div>
         <p className="text-slate-600 flex items-center">All rights reserved.</p>
       </div>
     </div>
