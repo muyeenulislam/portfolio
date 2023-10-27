@@ -21,7 +21,7 @@ const AboutSection = () => {
     });
   };
   return (
-    <section className="text-white">
+    <section className="text-white" id="about">
       <h2 className="text-center text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600 mt-8">
         About Me
       </h2>
