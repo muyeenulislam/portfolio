@@ -14,13 +14,38 @@ import { portfolioData } from "@/data/cvData";
 export default function Home() {
   const { profile, navItems, experiences, projects, skillGroups, education } =
     portfolioData;
+  const emailAddress = profile.email.replace("mailto:", "");
   const githubUrl =
     profile.socials.find((social) => social.label === "GitHub")?.href ?? "#";
   const linkedinUrl =
     profile.socials.find((social) => social.label === "LinkedIn")?.href ?? "#";
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        name: profile.name,
+        url: "https://muyeenulislam.vercel.app",
+        email: emailAddress,
+        jobTitle: profile.headline,
+        image: "https://muyeenulislam.vercel.app/images/heroImg.png",
+        sameAs: profile.socials.map((social) => social.href),
+      },
+      {
+        "@type": "WebSite",
+        name: "Md. Muyeen Ul Islam Portfolio",
+        url: "https://muyeenulislam.vercel.app",
+        description: profile.summary,
+      },
+    ],
+  };
 
   return (
     <div className="relative min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar logo={profile.navLogo} navItems={navItems} />
       <HeroSection
         name={profile.name}

@@ -62,10 +62,10 @@ export const portfolioData = {
     name: "Md. Muyeen - Ul - Islam",
     headline: "Full Stack Developer and Software Engineer",
     summary:
-      "Frontend-focused full stack engineer building responsive, high-performance products with modern React ecosystems and scalable backend integrations.",
+      "Full stack developer building responsive, high-performance digital products with strong frontend engineering, scalable backend architecture, and reliable cloud integrations.",
     about: [
       "I build product experiences that feel fast, polished, and intuitive while keeping code quality and scalability in focus.",
-      "My work spans frontend architecture, backend integrations, API design, and production debugging with strong ownership from planning to delivery.",
+      "My work spans frontend systems, backend services, API design, database modeling, and production debugging with strong ownership from planning to delivery.",
       "I enjoy collaborating closely with design and product teams to transform requirements into reliable, user-centered solutions.",
     ],
     location:

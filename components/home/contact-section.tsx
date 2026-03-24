@@ -4,14 +4,12 @@ import Lottie from "lottie-react";
 import { useEffect, useRef, useState } from "react";
 import type { SubmitEvent } from "react";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
-import { createPortal } from "react-dom";
 
 import type { SocialLink } from "@/data/cvData";
 import hiAnimation from "@/public/hiAnimation.json";
 
 import { GlassCard } from "@/components/glass-card";
 import { SectionHeading } from "@/components/section-heading";
-import { cn } from "@/lib/cn";
 
 type ContactSectionProps = {
   email: string;
@@ -58,16 +56,10 @@ export function ContactSection({
 }: ContactSectionProps) {
   const [form, setForm] = useState<FormState>(initialFormState);
   const [isSending, setIsSending] = useState(false);
-  const [toast, setToast] = useState<ToastState>({
-    message: "asdasd",
-    tone: "success",
-  });
-  const [isClient, setIsClient] = useState(false);
+  const [toast, setToast] = useState<ToastState>(null);
   const toastTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    setIsClient(true);
-
     return () => {
       if (toastTimeoutRef.current) {
         clearTimeout(toastTimeoutRef.current);
@@ -120,27 +112,6 @@ export function ContactSection({
     setForm((previous) => ({ ...previous, [field]: value }));
   }
 
-  const toastUi = (
-    <div
-      aria-live="polite"
-      className={cn(
-        "pointer-events-none fixed top-24 right-4 z-200 w-[min(20rem,calc(100%-2rem))] transition-all duration-300",
-        toast ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0",
-      )}
-    >
-      <div
-        className={cn(
-          "rounded-xl border px-4 py-3 text-sm font-medium shadow-2xl backdrop-blur-xl",
-          toast?.tone === "success"
-            ? "border-emerald-300/45 bg-emerald-500/15 text-emerald-100"
-            : "border-rose-300/45 bg-rose-500/15 text-rose-100",
-        )}
-      >
-        {toast?.message}
-      </div>
-    </div>
-  );
-
   return (
     <section id="contact" className="anchor-offset section-screen">
       <div className="section-content">
@@ -175,10 +146,6 @@ export function ContactSection({
                 </p>
                 <p>
                   <span className="text-brand-200/70">Phone:</span> {phone}
-                </p>
-                <p>
-                  <span className="text-brand-200/70">Location:</span>{" "}
-                  {location}
                 </p>
               </div>
               <h3 className="mt-6 font-heading text-xl font-semibold text-brand-100">
@@ -266,11 +233,22 @@ export function ContactSection({
               >
                 {isSending ? "Sending..." : "Send Message"}
               </button>
+              {toast ? (
+                <p
+                  aria-live="polite"
+                  className={`text-sm font-medium ${
+                    toast.tone === "success"
+                      ? "text-emerald-200"
+                      : "text-rose-200"
+                  }`}
+                >
+                  {toast.message}
+                </p>
+              ) : null}
             </form>
           </div>
         </GlassCard>
       </div>
-      {isClient ? createPortal(toastUi, document.body) : null}
     </section>
   );
 }

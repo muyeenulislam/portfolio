@@ -26,7 +26,7 @@ export function AboutSection({
           title="Who I Am"
           description="A quick overview of my approach to engineering, collaboration, and building reliable digital products."
         />
-        <div className="grid items-start gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="grid items-start gap-6 md:grid-cols-[0.95fr_1.05fr]">
           <Image
             src={visual}
             alt="About visual"
