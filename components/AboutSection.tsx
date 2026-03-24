@@ -1,0 +1,85 @@
+import Image from "next/image";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+
+import { SectionHeading } from "@/components/SectionHeading";
+import { SectionReveal } from "@/components/SectionReveal";
+
+type AboutSectionProps = {
+  summary: string;
+  about: ReadonlyArray<string>;
+  visual: string;
+  githubUrl: string;
+  linkedinUrl: string;
+};
+
+export function AboutSection({
+  summary,
+  about,
+  visual,
+  githubUrl,
+  linkedinUrl,
+}: AboutSectionProps) {
+  return (
+    <section id="about" className="anchor-offset section-screen">
+      <div className="section-content">
+        <SectionHeading
+          label="About"
+          title="Who I Am"
+          description="A quick overview of my approach to engineering, collaboration, and building reliable digital products."
+        />
+        <SectionReveal>
+          <div className="grid items-start gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+            <div className="relative h-64 overflow-hidden rounded-3xl border border-brand-200/20 sm:h-80">
+              <Image
+                src={visual}
+                alt="About visual"
+                fill
+                className="object-cover transition duration-700 hover:scale-105"
+                sizes="(max-width: 1024px) 100vw, 40vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent" />
+            </div>
+            <div className="space-y-4">
+              <p className="text-sm leading-relaxed text-brand-200/85 sm:text-base">
+                {summary}
+              </p>
+              {about.map((line) => (
+                <p
+                  key={line}
+                  className="text-sm leading-relaxed text-brand-200/80 sm:text-base"
+                >
+                  {line}
+                </p>
+              ))}
+              <div className="pt-2">
+                <p className="mb-3 text-xs font-semibold tracking-[0.18em] text-brand-200/70 uppercase">
+                  Connect
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href={githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="GitHub"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-200/35 bg-brand-700/20 text-brand-100 transition hover:-translate-y-0.5 hover:bg-brand-700/40"
+                  >
+                    <FaGithub size={18} />
+                  </a>
+                  <a
+                    href={linkedinUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="LinkedIn"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-200/35 bg-brand-700/20 text-brand-100 transition hover:-translate-y-0.5 hover:bg-brand-700/40"
+                  >
+                    <FaLinkedinIn size={18} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </SectionReveal>
+      </div>
+    </section>
+  );
+}
