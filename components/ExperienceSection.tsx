@@ -19,8 +19,12 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
         />
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           {experiences.map((experience, index) => (
-            <SectionReveal key={`${experience.company}-${experience.period}`} delay={index * 90} className="h-full">
-              <GlassCard className="card-hover flex h-full flex-col">
+            <SectionReveal
+              key={`${experience.company}-${experience.period}`}
+              delay={index * 90}
+              className="h-full"
+            >
+              <GlassCard cardHoverEffect className="flex h-full flex-col">
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div>
                     <h3 className="font-heading text-xl font-semibold text-brand-100 sm:text-2xl">

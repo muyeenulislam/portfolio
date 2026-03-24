@@ -29,16 +29,14 @@ export function AboutSection({
         />
         <SectionReveal>
           <div className="grid items-start gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-            <div className="relative h-64 overflow-hidden rounded-3xl border border-brand-200/20 sm:h-80">
-              <Image
-                src={visual}
-                alt="About visual"
-                fill
-                className="object-cover transition duration-700 hover:scale-105"
-                sizes="(max-width: 1024px) 100vw, 40vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent" />
-            </div>
+            <Image
+              src={visual}
+              alt="About visual"
+              height={800}
+              width={400}
+              className="object-cover w-full h-full rounded-2xl"
+            />
+
             <div className="space-y-4">
               <p className="text-sm leading-relaxed text-brand-200/85 sm:text-base">
                 {summary}
@@ -63,7 +61,7 @@ export function AboutSection({
                     aria-label="GitHub"
                     className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-200/35 bg-brand-700/20 text-brand-100 transition hover:-translate-y-0.5 hover:bg-brand-700/40"
                   >
-                    <FaGithub size={18} />
+                    <FaGithub size={"1.125rem"} />
                   </a>
                   <a
                     href={linkedinUrl}
@@ -72,7 +70,7 @@ export function AboutSection({
                     aria-label="LinkedIn"
                     className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-200/35 bg-brand-700/20 text-brand-100 transition hover:-translate-y-0.5 hover:bg-brand-700/40"
                   >
-                    <FaLinkedinIn size={18} />
+                    <FaLinkedinIn size={"1.125rem"} />
                   </a>
                 </div>
               </div>

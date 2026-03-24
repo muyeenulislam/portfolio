@@ -16,42 +16,63 @@ export function useActiveSection(hrefs: ReadonlyArray<string>) {
   useEffect(() => {
     if (targets.length === 0) return;
 
-    const sections = targets
-      .map((href) => document.querySelector<HTMLElement>(href))
-      .filter(Boolean) as HTMLElement[];
+    let ticking = false;
 
-    if (sections.length === 0) return;
+    const updateActive = () => {
+      const offset = window.innerHeight * 0.28;
+      let current = targets[0];
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-        if (visible[0]) {
-          setActiveHref(`#${visible[0].target.id}`);
+      for (const href of targets) {
+        const section = document.querySelector<HTMLElement>(href);
+        if (!section) continue;
+        if (section.getBoundingClientRect().top - offset <= 0) {
+          current = href;
         }
-      },
-      {
-        rootMargin: "-35% 0px -45% 0px",
-        threshold: [0.15, 0.3, 0.5, 0.7],
-      },
-    );
+      }
 
-    sections.forEach((section) => observer.observe(section));
+      setActiveHref((previous) => (previous === current ? previous : current));
+    };
+
+    const updateFromHash = () => {
+      const hash = window.location.hash;
+      if (targets.includes(hash)) {
+        setActiveHref((previous) => (previous === hash ? previous : hash));
+        return;
+      }
+      updateActive();
+    };
 
     const handleScroll = () => {
-      if (window.scrollY < 120) {
-        setActiveHref(targets[0]);
-      }
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        updateActive();
+        ticking = false;
+      });
+    };
+
+    updateFromHash();
+
+    const handleClick = (event: MouseEvent) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const anchor = target.closest<HTMLAnchorElement>("a[href^='#']");
+      if (!anchor) return;
+      const hash = anchor.getAttribute("href");
+      if (!hash || !targets.includes(hash)) return;
+      setActiveHref((previous) => (previous === hash ? previous : hash));
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
+    window.addEventListener("resize", handleScroll);
+    window.addEventListener("hashchange", updateFromHash);
+    document.addEventListener("click", handleClick);
 
     return () => {
-      observer.disconnect();
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+      window.removeEventListener("hashchange", updateFromHash);
+      document.removeEventListener("click", handleClick);
     };
   }, [targets]);
 

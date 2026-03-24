@@ -17,7 +17,7 @@ export function HeroSection({
       <SectionReveal>
         <WavyBackground
           containerClassName="h-[100svh] w-full bg-black/40"
-          className="mx-auto flex h-full w-full max-w-6xl items-center px-4 py-10 sm:px-6 lg:px-10"
+          className="mx-auto flex h-full w-full max-w-6xl items-center"
           waveOpacity={0.5}
           blur={14}
           waveWidth={56}

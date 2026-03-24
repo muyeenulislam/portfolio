@@ -20,7 +20,7 @@ export default function Home() {
     profile.socials.find((social) => social.label === "LinkedIn")?.href ?? "#";
 
   return (
-    <div className="relative isolate min-h-screen">
+    <div className="relative min-h-screen">
       <Navbar logo={profile.navLogo} navItems={navItems} />
       <HeroSection
         name={profile.name}
@@ -28,7 +28,7 @@ export default function Home() {
         cvDownloadUrl={profile.cvDownloadUrl}
       />
 
-      <section className="relative isolate overflow-hidden">
+      <section className="relative overflow-hidden">
         <BackgroundBeams className="pointer-events-none fixed inset-0 opacity-55" />
         <main className="relative z-10">
           <AboutSection

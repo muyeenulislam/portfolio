@@ -199,7 +199,7 @@ export const portfolioData = {
     {
       name: "GamerExchange",
       href: "https://gamerexchange.com",
-      image: "/images/projects/gtn.png",
+      image: "/images/projects/mge.png",
       description:
         "Digital gaming store for voucher redemption and game top-ups with a clean, modern commerce flow and third-party API integrations.",
       stack: [
@@ -214,7 +214,7 @@ export const portfolioData = {
     {
       name: "NobleMarriage",
       href: "https://noblemarriage.com",
-      image: "/images/projects/treeland.jpg",
+      image: "/images/projects/noblemarriage.png",
       description:
         "Global Muslim matrimony platform focused on meaningful matchmaking and inclusive UX.",
       stack: ["Next.js", "React", "Tailwind CSS"],
@@ -222,7 +222,7 @@ export const portfolioData = {
     {
       name: "eSora Studio",
       href: "https://main.d1g037kldojyzk.amplifyapp.com/",
-      image: "/images/projects/pg.png",
+      image: "/images/projects/esora.png",
       description:
         "SEO-focused studio website using reusable architecture, dynamic routes, centralized content, and smooth interactions.",
       stack: ["Next.js 16", "React 19", "Tailwind CSS 4"],
@@ -230,7 +230,7 @@ export const portfolioData = {
     {
       name: "Barnabus",
       href: "https://barnabus.ai/",
-      image: "/images/projects/cnn.jpg",
+      image: "/images/projects/barnabus.png",
       description:
         "Multi-page product site with animated storytelling, SEO assets, lead capture, and API integrations.",
       stack: ["Next.js 16", "TypeScript", "AWS Lambda", "API Gateway"],
@@ -238,7 +238,7 @@ export const portfolioData = {
     {
       name: "UniVision",
       href: "https://univision.hk/",
-      image: "/images/projects/activity.jpg",
+      image: "/images/projects/univision.png",
       description:
         "EdTech platform streamlining university applications with AI-powered tools and a large university dataset.",
       stack: [
@@ -253,17 +253,9 @@ export const portfolioData = {
     {
       name: "Z3 Engineering",
       href: "https://z3engineering.com.tr/",
-      image: "/images/projects/crownClothing.jpeg",
+      image: "/images/projects/z3.png",
       description:
         "Interior design and architecture website showcasing end-to-end residential and commercial solutions.",
-      stack: ["Next.js", "Tailwind CSS"],
-    },
-    {
-      name: "Portfolio",
-      href: "https://muyeenulislam.vercel.app/",
-      image: "/images/projects/portfoliov1.png",
-      description:
-        "Personal portfolio presenting projects, experience, and technical strengths in an interactive format.",
       stack: ["Next.js", "Tailwind CSS"],
     },
   ] as Project[],

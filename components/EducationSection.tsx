@@ -19,13 +19,13 @@ export function EducationSection({ education }: EducationSectionProps) {
         />
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {education.map((item, index) => (
-            <SectionReveal key={item.institution} delay={index * 80} className="h-full">
-              <GlassCard className="card-hover h-full">
-                <h3 className="font-heading text-xl font-semibold text-brand-100">{item.institution}</h3>
-                <p className="mt-2 text-brand-200/90">{item.credential}</p>
-                <p className="mt-1 text-sm text-brand-200/70">{item.details}</p>
-              </GlassCard>
-            </SectionReveal>
+            <GlassCard cardHoverEffect className="h-full" key={index}>
+              <h3 className="font-heading text-xl font-semibold text-brand-100">
+                {item.institution}
+              </h3>
+              <p className="mt-2 text-brand-200/90">{item.credential}</p>
+              <p className="mt-1 text-sm text-brand-200/70">{item.details}</p>
+            </GlassCard>
           ))}
         </div>
       </div>

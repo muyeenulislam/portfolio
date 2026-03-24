@@ -11,7 +11,11 @@ type SectionRevealProps = {
   delay?: number;
 };
 
-export function SectionReveal({ children, className, delay = 0 }: SectionRevealProps) {
+export function SectionReveal({
+  children,
+  className,
+  delay = 0,
+}: SectionRevealProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 

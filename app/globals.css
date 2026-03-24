@@ -19,18 +19,6 @@
 
   body {
     @apply min-h-screen bg-brand-950 font-body text-brand-200 antialiased;
-    background-image:
-      radial-gradient(
-        circle at 12% 15%,
-        rgba(64, 138, 113, 0.18),
-        transparent 34%
-      ),
-      radial-gradient(
-        circle at 86% 12%,
-        rgba(176, 228, 204, 0.14),
-        transparent 30%
-      ),
-      linear-gradient(180deg, #040808 0%, #06100f 45%, #091413 100%);
   }
 
   ::selection {
@@ -40,22 +28,6 @@
 }
 
 @layer components {
-  .glass-card {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    background: linear-gradient(
-      140deg,
-      rgba(5, 12, 11, 0.76),
-      rgba(40, 90, 72, 0.24)
-    );
-    border: 1px solid rgba(176, 228, 204, 0.2);
-    box-shadow:
-      0 18px 55px rgba(0, 0, 0, 0.45),
-      inset 0 1px 0 rgba(176, 228, 204, 0.12);
-    backdrop-filter: blur(18px);
-  }
-
   .section-kicker {
     @apply inline-flex items-center rounded-full border border-brand-200/30 bg-brand-200/10 px-4 py-1 text-xs font-semibold tracking-[0.22em] text-brand-100 uppercase;
   }
@@ -65,46 +37,11 @@
   }
 
   .section-screen {
-    @apply flex min-h-screen w-full items-center py-8 sm:py-10 lg:py-40!;
+    @apply flex min-h-screen w-full items-center py-8 sm:py-10 lg:py-12;
   }
 
   .section-content {
     @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-10;
-  }
-
-  .card-hover {
-    transition:
-      transform 350ms ease,
-      border-color 350ms ease,
-      box-shadow 350ms ease;
-  }
-
-  .card-hover:hover {
-    transform: translateY(-6px);
-    border-color: rgba(176, 228, 204, 0.34);
-    box-shadow:
-      0 25px 60px rgba(0, 0, 0, 0.45),
-      inset 0 1px 0 rgba(176, 228, 204, 0.25);
-  }
-
-  .glow-card::before {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    z-index: -1;
-    background: radial-gradient(
-      340px circle at var(--mx, 50%) var(--my, 50%),
-      rgba(176, 228, 204, 0.23),
-      rgba(64, 138, 113, 0.16) 25%,
-      transparent 62%
-    );
-    opacity: 0;
-    transition: opacity 260ms ease;
-    pointer-events: none;
-  }
-
-  .glow-card:hover::before {
-    opacity: 1;
   }
 }
 
@@ -115,14 +52,14 @@
       transform: translate3d(0, 0, 0) scale(1);
     }
     50% {
-      transform: translate3d(0, -20px, 0) scale(1.06);
+      transform: translate3d(0, -1.25rem, 0) scale(1.06);
     }
   }
 
   @keyframes rise {
     from {
       opacity: 0;
-      transform: translateY(14px) scale(0.985);
+      transform: translateY(0.875rem) scale(0.985);
     }
     to {
       opacity: 1;
@@ -136,7 +73,7 @@
       box-shadow: 0 0 0 rgba(176, 228, 204, 0);
     }
     50% {
-      box-shadow: 0 0 35px rgba(176, 228, 204, 0.24);
+      box-shadow: 0 0 2.1875rem rgba(176, 228, 204, 0.24);
     }
   }
 
@@ -145,7 +82,7 @@
       transform: rotate(0deg) translateY(0);
     }
     50% {
-      transform: rotate(170deg) translateY(-10px);
+      transform: rotate(170deg) translateY(-0.625rem);
     }
     100% {
       transform: rotate(360deg) translateY(0);
@@ -157,7 +94,7 @@
       transform: rotate(0deg) translateY(0);
     }
     50% {
-      transform: rotate(-160deg) translateY(7px);
+      transform: rotate(-160deg) translateY(0.4375rem);
     }
     100% {
       transform: rotate(-360deg) translateY(0);
@@ -170,7 +107,7 @@
       transform: translate3d(0, 0, 0) rotate(0deg);
     }
     50% {
-      transform: translate3d(12px, -14px, 0) rotate(12deg);
+      transform: translate3d(0.75rem, -0.875rem, 0) rotate(12deg);
     }
   }
 
@@ -204,17 +141,13 @@
 
   .reveal {
     opacity: 0;
-    transform: translate3d(0, 22px, 0) scale(0.985);
-    transition:
-      opacity 650ms cubic-bezier(0.2, 0.8, 0.2, 1),
-      transform 650ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: opacity 650ms cubic-bezier(0.2, 0.8, 0.2, 1);
     transition-delay: var(--reveal-delay, 0ms);
-    will-change: opacity, transform;
+    will-change: opacity;
   }
 
   .reveal-visible {
     opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
   }
 
   .animate-pulse-glow {
@@ -239,7 +172,7 @@
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 0.625rem;
 }
 
 ::-webkit-scrollbar-track {

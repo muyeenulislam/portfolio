@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 
 import type { NavItem, SocialLink } from "@/data/cvData";
 import { cn } from "@/lib/cn";
@@ -12,6 +13,13 @@ type FooterProps = {
   navItems: ReadonlyArray<NavItem>;
   socials: ReadonlyArray<SocialLink>;
 };
+
+function getSocialIcon(label: string) {
+  const normalized = label.toLowerCase();
+  if (normalized.includes("github")) return FaGithub;
+  if (normalized.includes("linkedin")) return FaLinkedinIn;
+  return null;
+}
 
 export function Footer({ name, logo, navItems, socials }: FooterProps) {
   const visibleItems = navItems.filter((item) => item.href !== "#top");
@@ -27,7 +35,7 @@ export function Footer({ name, logo, navItems, socials }: FooterProps) {
               alt="Footer logo"
               fill
               className="object-cover"
-              sizes="56px"
+              sizes="3.5rem"
             />
           </div>
 
@@ -49,17 +57,22 @@ export function Footer({ name, logo, navItems, socials }: FooterProps) {
           </div>
 
           <div className="flex flex-wrap gap-2 md:justify-end">
-            {socials.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-full border border-brand-200/20 px-3 py-1.5 text-xs text-brand-200/85 transition hover:border-brand-200/55 hover:text-brand-100"
-              >
-                {social.label}
-              </a>
-            ))}
+            {socials.map((social) => {
+              const Icon = getSocialIcon(social.label);
+              if (!Icon) return null;
+              return (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={social.label}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand-200/20 text-brand-200/85 transition hover:border-brand-200/55 hover:text-brand-100"
+                >
+                  <Icon size={15} />
+                </a>
+              );
+            })}
           </div>
         </div>
         <p className="mt-6 text-center text-xs text-brand-200/65 sm:text-sm">

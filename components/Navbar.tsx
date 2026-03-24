@@ -19,33 +19,22 @@ export function Navbar({ logo, navItems }: NavbarProps) {
   const activeHref = useActiveSection(visibleItems.map((item) => item.href));
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
-      <nav className="flex gap-2  justify-between  items-center mx-auto mt-4 w-[min(1120px,calc(100%-1rem))] rounded-2xl border border-brand-200/25 bg-black/65 px-3 py-2.5 shadow-2xl shadow-black/60 backdrop-blur-xl sm:px-4">
-        <div className="flex items-center justify-between gap-4">
-          <a
-            href="#top"
-            className="group relative block h-11 w-11 overflow-hidden rounded-xl border border-brand-200/35"
-          >
-            <Image
-              src={logo}
-              alt="Site logo"
-              fill
-              className="object-cover transition duration-500 group-hover:scale-110"
-              sizes="44px"
-            />
-            <span className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent" />
-          </a>
-          <button
-            type="button"
-            aria-expanded={open}
-            aria-label="Toggle menu"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand-200/30 bg-brand-700/20 text-brand-100 transition hover:bg-brand-700/40 md:hidden"
-            onClick={() => setOpen((previous) => !previous)}
-          >
-            {open ? <FiX size={18} /> : <FiMenu size={18} />}
-          </button>
-        </div>
-        <ul className="hidden items-center gap-1 text-sm md:flex">
+    <header className="fixed inset-x-0 top-0 z-50 ">
+      <nav className="relative mx-auto mt-4 flex w-[min(70rem,calc(100%-1rem))] items-center gap-3 rounded-2xl border border-brand-200/25 bg-black/35 px-3 py-2.5 shadow-md backdrop-blur-xl sm:px-4">
+        <a
+          href="#top"
+          className="group relative block h-11 w-11 shrink-0 overflow-hidden rounded-xl border border-brand-200/35"
+        >
+          <Image
+            src={logo}
+            alt="Site logo"
+            fill
+            className="object-cover transition duration-500 group-hover:scale-110"
+            sizes="2.75rem"
+          />
+          <span className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent" />
+        </a>
+        <ul className="hidden flex-1 items-center justify-end gap-1 text-sm md:flex">
           {visibleItems.map((item) => (
             <li key={item.href}>
               <a
@@ -62,28 +51,39 @@ export function Navbar({ logo, navItems }: NavbarProps) {
             </li>
           ))}
         </ul>
-        <ul
-          className={`grid overflow-hidden text-sm transition-all duration-500 md:hidden ${
-            open ? "mt-3 max-h-96 gap-2 opacity-100" : "max-h-0 gap-0 opacity-0"
+        <button
+          type="button"
+          aria-expanded={open}
+          aria-label="Toggle menu"
+          className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand-200/30 bg-brand-700/20 text-brand-100 transition hover:bg-brand-700/40 md:hidden"
+          onClick={() => setOpen((previous) => !previous)}
+        >
+          {open ? <FiX size={"1.125rem"} /> : <FiMenu size={"1.125rem"} />}
+        </button>
+        <div
+          className={`absolute inset-x-0 top-[calc(100%+0.5rem)] overflow-hidden rounded-2xl border border-brand-200/20 bg-black/35 shadow-2xl shadow-black/60 backdrop-blur-xl transition-all duration-500 md:hidden ${
+            open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          {visibleItems.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className={cn(
-                  "block rounded-xl border px-3 py-2 transition",
-                  activeHref === item.href
-                    ? "border-brand-200/45 bg-brand-700/35 text-brand-100"
-                    : "border-brand-200/15 bg-brand-950/70 text-brand-100/85 hover:bg-brand-700/30",
-                )}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+          <ul className="grid gap-2 p-3 text-sm">
+            {visibleItems.map((item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className={cn(
+                    "block rounded-xl border px-3 py-2 transition",
+                    activeHref === item.href
+                      ? "border-brand-200/45 bg-brand-700/35 text-brand-100"
+                      : "border-brand-200/15 bg-brand-950/70 text-brand-100/85 hover:bg-brand-700/30",
+                  )}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </nav>
     </header>
   );
