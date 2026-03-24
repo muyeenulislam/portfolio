@@ -11,7 +11,7 @@ export function useActiveSection(hrefs: ReadonlyArray<string>) {
         .filter((href) => href.startsWith("#") && href.length > 1),
     [hrefKey],
   );
-  const [activeHref, setActiveHref] = useState(targets[0] ?? "");
+  const [activeHref, setActiveHref] = useState("");
 
   useEffect(() => {
     if (targets.length === 0) return;
@@ -20,7 +20,13 @@ export function useActiveSection(hrefs: ReadonlyArray<string>) {
 
     const updateActive = () => {
       const offset = window.innerHeight * 0.28;
-      let current = targets[0];
+      const hero = document.querySelector<HTMLElement>("#top");
+      if (hero && hero.getBoundingClientRect().bottom > offset) {
+        setActiveHref((previous) => (previous === "" ? previous : ""));
+        return;
+      }
+
+      let current = "";
 
       for (const href of targets) {
         const section = document.querySelector<HTMLElement>(href);
@@ -35,8 +41,12 @@ export function useActiveSection(hrefs: ReadonlyArray<string>) {
 
     const updateFromHash = () => {
       const hash = window.location.hash;
+      if (hash === "#top" || hash === "") {
+        setActiveHref((previous) => (previous === "" ? previous : ""));
+        return;
+      }
       if (targets.includes(hash)) {
-        setActiveHref((previous) => (previous === hash ? previous : hash));
+        window.requestAnimationFrame(updateActive);
         return;
       }
       updateActive();
@@ -59,7 +69,12 @@ export function useActiveSection(hrefs: ReadonlyArray<string>) {
       const anchor = target.closest<HTMLAnchorElement>("a[href^='#']");
       if (!anchor) return;
       const hash = anchor.getAttribute("href");
-      if (!hash || !targets.includes(hash)) return;
+      if (!hash) return;
+      if (hash === "#top") {
+        setActiveHref((previous) => (previous === "" ? previous : ""));
+        return;
+      }
+      if (!targets.includes(hash)) return;
       setActiveHref((previous) => (previous === hash ? previous : hash));
     };
 

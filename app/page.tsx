@@ -1,14 +1,14 @@
-import { AboutSection } from "@/components/AboutSection";
-import { BackgroundBeams } from "@/components/BackgroundBeams";
-import { ContactSection } from "@/components/ContactSection";
-import { EducationSection } from "@/components/EducationSection";
-import { ExperienceSection } from "@/components/ExperienceSection";
-import { Footer } from "@/components/Footer";
-import { HeroSection } from "@/components/HeroSection";
-import { Navbar } from "@/components/Navbar";
-import { ProjectsSection } from "@/components/ProjectsSection";
-import { ScrollTopButton } from "@/components/ScrollTopButton";
-import { SkillsSection } from "@/components/SkillsSection";
+import { BackgroundBeams } from "@/components/background-beams";
+import { AboutSection } from "@/components/home/about-section";
+import { ContactSection } from "@/components/home/contact-section";
+import { EducationSection } from "@/components/home/education-section";
+import { ExperienceSection } from "@/components/home/experience-section";
+import { Footer } from "@/components/home/footer";
+import { HeroSection } from "@/components/home/hero-section";
+import { Navbar } from "@/components/home/navbar";
+import { ProjectsSection } from "@/components/home/projects-section";
+import { ScrollTopButton } from "@/components/home/scroll-top-button";
+import { SkillsSection } from "@/components/home/skills-section";
 import { portfolioData } from "@/data/cvData";
 
 export default function Home() {
@@ -46,7 +46,6 @@ export default function Home() {
             email={profile.email}
             phone={profile.phone}
             location={profile.location}
-            contactVisual={profile.contactVisual}
             socials={profile.socials}
           />
         </main>

@@ -8,6 +8,13 @@ type Payload = {
   message?: string;
 };
 
+type NormalizedPayload = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
+
 function getTransporter() {
   const host = process.env.SMTP_HOST;
   const port = Number(process.env.SMTP_PORT ?? "587");
@@ -26,37 +33,47 @@ function getTransporter() {
   });
 }
 
-function isValid(payload: Payload) {
-  return (
-    payload.name &&
-    payload.email &&
-    payload.subject &&
-    payload.message &&
-    payload.name.trim().length > 1 &&
-    payload.email.includes("@") &&
-    payload.subject.trim().length > 2 &&
-    payload.message.trim().length > 9
-  );
+function normalizePayload(payload: Payload): NormalizedPayload {
+  return {
+    name: payload.name?.trim() ?? "",
+    email: payload.email?.trim() ?? "",
+    subject: payload.subject?.trim() ?? "",
+    message: payload.message?.trim() ?? "",
+  };
+}
+
+function isValidEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function getValidationMessage(payload: NormalizedPayload) {
+  if (payload.name.length < 2) return "Please provide a valid name.";
+  if (!isValidEmail(payload.email)) return "Please provide a valid email.";
+  if (payload.subject.length < 1) return "Please provide a subject.";
+  if (payload.message.length < 1) return "Please provide a message.";
+  return null;
 }
 
 export async function POST(request: Request) {
-  const body = (await request.json()) as Payload;
+  let body: Payload;
 
-  if (!isValid(body)) {
+  try {
+    body = (await request.json()) as Payload;
+  } catch {
     return NextResponse.json(
-      { message: "Please provide valid name, email, subject, and message." },
+      { message: "Invalid request body. Please refresh and try again." },
       { status: 400 },
     );
   }
 
-  try {
-    const normalized = {
-      name: body.name!.trim(),
-      email: body.email!.trim(),
-      subject: body.subject!.trim(),
-      message: body.message!.trim(),
-    };
+  const normalized = normalizePayload(body);
+  const validationMessage = getValidationMessage(normalized);
 
+  if (validationMessage) {
+    return NextResponse.json({ message: validationMessage }, { status: 400 });
+  }
+
+  try {
     const transporter = getTransporter();
     const to = process.env.MAIL_TO ?? "muyeenulislamsakif@gmail.com";
     const from = process.env.MAIL_FROM ?? process.env.SMTP_USER;

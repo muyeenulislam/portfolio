@@ -1,8 +1,7 @@
 import type { Education } from "@/data/cvData";
 
-import { GlassCard } from "@/components/GlassCard";
-import { SectionHeading } from "@/components/SectionHeading";
-import { SectionReveal } from "@/components/SectionReveal";
+import { GlassCard } from "@/components/glass-card";
+import { SectionHeading } from "@/components/section-heading";
 
 type EducationSectionProps = {
   education: ReadonlyArray<Education>;

@@ -59,8 +59,8 @@ export type SkillGroup = {
 
 export const portfolioData = {
   profile: {
-    name: "Md. Muyeen Ul Islam",
-    headline: "Full Stack Engineer",
+    name: "Md. Muyeen - Ul - Islam",
+    headline: "Full Stack Developer and Software Engineer",
     summary:
       "Frontend-focused full stack engineer building responsive, high-performance products with modern React ecosystems and scalable backend integrations.",
     about: [
@@ -72,11 +72,11 @@ export const portfolioData = {
       "House C-2 & C-4, Road 18, Block C, Banasree, Rampura, Dhaka 1219, Bangladesh",
     phone: "+8801871082759",
     email: "mailto:muyeenulislamsakif@gmail.com",
-    avatar: "/images/heroImg.jpg",
-    navLogo: "/images/navIcon.jpg",
-    heroVisual: "/images/aboutPhoto.jpeg",
-    contactVisual: "/images/navIcon.jpg",
-    cvDownloadUrl: "/cv/Md-Muyeen-Ul-Islam-CV.docx",
+    avatar: "/images/heroImg.png",
+    navLogo: "/images/navIcon.png",
+    heroVisual: "/images/about.png",
+    contactVisual: "/images/navIcon.png",
+    cvDownloadUrl: "/cv/Md_Muyeen_Ul_Islam.pdf",
     socials: [
       { label: "GitHub", href: "https://github.com/muyeenulislam" },
       {
@@ -100,7 +100,7 @@ export const portfolioData = {
   ] as ReadonlyArray<NavItem>,
   experiences: [
     {
-      role: "Full Stack Engineer (Frontend Focused)",
+      role: "Full Stack Engineer",
       company: "Paynest",
       period: "May 2025 - Present",
       responsibilities: [

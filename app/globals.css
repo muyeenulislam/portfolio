@@ -10,6 +10,8 @@
   --color-brand-500: #408a71;
   --color-brand-200: #b0e4cc;
   --color-brand-100: #dff6ec;
+
+  --shadow-card: 0px -1px 11px -1px rgba(255, 255, 255, 0.05) inset;
 }
 
 @layer base {
@@ -37,7 +39,7 @@
   }
 
   .section-screen {
-    @apply flex min-h-screen w-full items-center py-8 sm:py-10 lg:py-12;
+    @apply flex min-h-screen w-full items-center py-24;
   }
 
   .section-content {
@@ -137,17 +139,6 @@
 
   .animate-rise {
     animation: rise 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-  }
-
-  .reveal {
-    opacity: 0;
-    transition: opacity 650ms cubic-bezier(0.2, 0.8, 0.2, 1);
-    transition-delay: var(--reveal-delay, 0ms);
-    will-change: opacity;
-  }
-
-  .reveal-visible {
-    opacity: 1;
   }
 
   .animate-pulse-glow {

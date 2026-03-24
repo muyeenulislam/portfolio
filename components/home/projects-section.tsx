@@ -6,8 +6,8 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 import type { Project } from "@/data/cvData";
 
-import { GlassCard } from "@/components/GlassCard";
-import { SectionHeading } from "@/components/SectionHeading";
+import { GlassCard } from "@/components/glass-card";
+import { SectionHeading } from "@/components/section-heading";
 import Link from "next/link";
 
 type ProjectsSectionProps = {

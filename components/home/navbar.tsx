@@ -7,6 +7,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 import type { NavItem } from "@/data/cvData";
 import { cn } from "@/lib/cn";
 import { useActiveSection } from "@/lib/useActiveSection";
+import Link from "next/link";
 
 type NavbarProps = {
   logo: string;
@@ -19,9 +20,9 @@ export function Navbar({ logo, navItems }: NavbarProps) {
   const activeHref = useActiveSection(visibleItems.map((item) => item.href));
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 ">
-      <nav className="relative mx-auto mt-4 flex w-[min(70rem,calc(100%-1rem))] items-center gap-3 rounded-2xl border border-brand-200/25 bg-black/35 px-3 py-2.5 shadow-md backdrop-blur-xl sm:px-4">
-        <a
+    <header className="fixed inset-x-0 top-0 z-50">
+      <nav className="relative isolate mx-auto mt-4 flex w-[min(70rem,calc(100%-1rem))] items-center gap-3 rounded-2xl border border-brand-200/25 bg-black/35 px-3 py-2.5 shadow-md backdrop-blur-xl sm:px-4">
+        <Link
           href="#top"
           className="group relative block h-11 w-11 shrink-0 overflow-hidden rounded-xl border border-brand-200/35"
         >
@@ -33,7 +34,7 @@ export function Navbar({ logo, navItems }: NavbarProps) {
             sizes="2.75rem"
           />
           <span className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent" />
-        </a>
+        </Link>
         <ul className="hidden flex-1 items-center justify-end gap-1 text-sm md:flex">
           {visibleItems.map((item) => (
             <li key={item.href}>
@@ -61,10 +62,13 @@ export function Navbar({ logo, navItems }: NavbarProps) {
           {open ? <FiX size={"1.125rem"} /> : <FiMenu size={"1.125rem"} />}
         </button>
         <div
-          className={`absolute inset-x-0 top-[calc(100%+0.5rem)] overflow-hidden rounded-2xl border border-brand-200/20 bg-black/35 shadow-2xl shadow-black/60 backdrop-blur-xl transition-all duration-500 md:hidden ${
-            open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          className={`absolute inset-x-0 top-[calc(100%+0.5rem)] z-40 overflow-hidden rounded-2xl border border-brand-200/20 shadow-2xl shadow-black/60 transition-all duration-300 md:hidden bg-brand-950/80 ${
+            open
+              ? "max-h-96 opacity-100"
+              : "pointer-events-none max-h-0 opacity-0"
           }`}
         >
+          <div className="absolute inset-0 -z-10  backdrop-blur-2xl " />
           <ul className="grid gap-2 p-3 text-sm">
             {visibleItems.map((item) => (
               <li key={item.href}>
