@@ -16,23 +16,29 @@ export function useActiveSection(hrefs: ReadonlyArray<string>) {
   useEffect(() => {
     if (targets.length === 0) return;
 
+    const heroSection = document.querySelector<HTMLElement>("#top");
+    const sections = targets
+      .map((href) => {
+        const element = document.querySelector<HTMLElement>(href);
+        if (!element) return null;
+        return { href, element };
+      })
+      .filter((item): item is { href: string; element: HTMLElement } => item !== null);
+
     let ticking = false;
 
     const updateActive = () => {
       const offset = window.innerHeight * 0.28;
-      const hero = document.querySelector<HTMLElement>("#top");
-      if (hero && hero.getBoundingClientRect().bottom > offset) {
+      if (heroSection && heroSection.getBoundingClientRect().bottom > offset) {
         setActiveHref((previous) => (previous === "" ? previous : ""));
         return;
       }
 
       let current = "";
 
-      for (const href of targets) {
-        const section = document.querySelector<HTMLElement>(href);
-        if (!section) continue;
-        if (section.getBoundingClientRect().top - offset <= 0) {
-          current = href;
+      for (const section of sections) {
+        if (section.element.getBoundingClientRect().top - offset <= 0) {
+          current = section.href;
         }
       }
 

@@ -32,6 +32,7 @@ export function AboutSection({
             alt="About visual"
             height={800}
             width={400}
+            sizes="(max-width: 768px) 100vw, 42vw"
             className="h-full w-full rounded-2xl object-cover"
           />
 

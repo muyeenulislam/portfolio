@@ -7,8 +7,25 @@ export function ScrollTopButton() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setIsVisible(window.scrollY > 260);
-    onScroll();
+    let ticking = false;
+
+    const updateVisibility = () => {
+      const nextVisible = window.scrollY > 260;
+      setIsVisible((previous) =>
+        previous === nextVisible ? previous : nextVisible,
+      );
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        updateVisibility();
+        ticking = false;
+      });
+    };
+
+    updateVisibility();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);

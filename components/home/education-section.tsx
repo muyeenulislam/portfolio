@@ -16,7 +16,7 @@ export function EducationSection({ education }: EducationSectionProps) {
           title="Academic Background"
           description="Formal education milestones supporting the engineering foundation."
         />
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4">
           {education.map((item, index) => (
             <GlassCard cardHoverEffect className="h-full" key={index}>
               <h3 className="font-heading text-xl font-semibold text-brand-100">

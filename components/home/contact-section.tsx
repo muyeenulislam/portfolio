@@ -1,15 +1,16 @@
 "use client";
 
-import Lottie from "lottie-react";
+import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import type { SubmitEvent } from "react";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 
 import type { SocialLink } from "@/data/cvData";
-import hiAnimation from "@/public/hiAnimation.json";
 
 import { GlassCard } from "@/components/glass-card";
 import { SectionHeading } from "@/components/section-heading";
+
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 type ContactSectionProps = {
   email: string;
@@ -57,7 +58,10 @@ export function ContactSection({
   const [form, setForm] = useState<FormState>(initialFormState);
   const [isSending, setIsSending] = useState(false);
   const [toast, setToast] = useState<ToastState>(null);
+  const [shouldLoadAnimation, setShouldLoadAnimation] = useState(false);
+  const [animationData, setAnimationData] = useState<object | null>(null);
   const toastTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lottieWrapperRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     return () => {
@@ -66,6 +70,39 @@ export function ContactSection({
       }
     };
   }, []);
+
+  useEffect(() => {
+    const node = lottieWrapperRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setShouldLoadAnimation(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "160px" },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!shouldLoadAnimation || animationData) return;
+
+    let active = true;
+    import("@/public/hiAnimation.json").then((module) => {
+      if (active) {
+        setAnimationData(module.default as object);
+      }
+    });
+
+    return () => {
+      active = false;
+    };
+  }, [animationData, shouldLoadAnimation]);
 
   function showToast(message: string, tone: "success" | "error") {
     setToast({ message, tone });
@@ -123,13 +160,20 @@ export function ContactSection({
         <GlassCard className="overflow-hidden">
           <div className="grid gap-6 lg:grid-cols-2">
             <div className="relative overflow-hidden rounded-2xl border border-brand-200/20 bg-black/30 p-4 sm:p-5">
-              <div className="relative mb-5 h-44 overflow-hidden">
-                <Lottie
-                  animationData={hiAnimation}
-                  loop
-                  autoplay
-                  className="h-full w-full"
-                />
+              <div
+                ref={lottieWrapperRef}
+                className="relative mb-5 h-44 overflow-hidden"
+              >
+                {animationData ? (
+                  <Lottie
+                    animationData={animationData}
+                    loop
+                    autoplay
+                    className="h-full w-full"
+                  />
+                ) : (
+                  <div className="h-full w-full rounded-xl bg-brand-700/15" />
+                )}
               </div>
               <h3 className="font-heading text-2xl font-semibold text-brand-100">
                 Direct Reach

@@ -31,13 +31,6 @@ export function WavyBackground({
 }: WavyBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const noise = useMemo(() => createNoise3D(), []);
-  const isSafari = useMemo(
-    () =>
-      typeof navigator !== "undefined" &&
-      navigator.userAgent.includes("Safari") &&
-      !navigator.userAgent.includes("Chrome"),
-    [],
-  );
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -50,29 +43,61 @@ export function WavyBackground({
     let height = 0;
     let time = 0;
     let frame = 0;
+    let lastFrameTime = 0;
+    let isInView = true;
+    let isDocumentVisible = !document.hidden;
+    let lowPowerMode = false;
+    let reducedMotion = false;
 
     const speedValue = speed === "slow" ? 0.001 : 0.002;
+    const parent = canvas.parentElement;
+    if (!parent) return;
 
-    const resize = () => {
-      const parent = canvas.parentElement;
-      if (!parent) return;
+    const reducedMotionQuery = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    const coarsePointerQuery = window.matchMedia("(pointer: coarse)");
+    const mobileViewportQuery = window.matchMedia("(max-width: 768px)");
 
-      width = context.canvas.width = parent.clientWidth;
-      height = context.canvas.height = parent.clientHeight;
-      context.filter = `blur(${blur}px)`;
+    const updatePerformanceMode = () => {
+      reducedMotion = reducedMotionQuery.matches;
+      lowPowerMode =
+        reducedMotion ||
+        coarsePointerQuery.matches ||
+        mobileViewportQuery.matches;
+      resize();
     };
 
-    const drawWave = (lines: number) => {
-      time += speedValue;
+    const resize = () => {
+      const pixelRatio = Math.min(
+        window.devicePixelRatio || 1,
+        lowPowerMode ? 1 : 1.5,
+      );
+      width = parent.clientWidth;
+      height = parent.clientHeight;
+      context.canvas.width = Math.max(1, Math.floor(width * pixelRatio));
+      context.canvas.height = Math.max(1, Math.floor(height * pixelRatio));
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    };
+
+    const drawWave = (lines: number, xStep: number, amplitude: number) => {
+      const currentWaveWidth = Math.max(
+        36,
+        waveWidth - (lowPowerMode ? 10 : 0),
+      );
 
       for (let i = 0; i < lines; i += 1) {
         context.beginPath();
-        context.lineWidth = waveWidth;
+        context.lineWidth = currentWaveWidth;
         context.strokeStyle = colors[i % colors.length];
 
-        for (let x = 0; x <= width; x += 5) {
-          const y = noise(x / 800, 0.3 * i, time) * 100;
-          context.lineTo(x, y + height * 0.5);
+        for (let x = 0; x <= width; x += xStep) {
+          const y = noise(x / 800, 0.3 * i, time) * amplitude;
+          if (x === 0) {
+            context.moveTo(0, y + height * 0.5);
+          } else {
+            context.lineTo(x, y + height * 0.5);
+          }
         }
 
         context.stroke();
@@ -80,21 +105,80 @@ export function WavyBackground({
       }
     };
 
-    const render = () => {
+    const render = (now: number) => {
+      frame = window.requestAnimationFrame(render);
+
+      if (!isInView || !isDocumentVisible) return;
+
+      const fps = reducedMotion ? 20 : lowPowerMode ? 24 : 36;
+      if (now - lastFrameTime < 1000 / fps) return;
+      lastFrameTime = now;
+
+      time += reducedMotion ? speedValue * 0.5 : speedValue;
+
       context.fillStyle = backgroundFill;
       context.globalAlpha = waveOpacity;
       context.fillRect(0, 0, width, height);
-      drawWave(5);
-      frame = window.requestAnimationFrame(render);
+      drawWave(
+        reducedMotion ? 3 : lowPowerMode ? 4 : 5,
+        reducedMotion ? 12 : lowPowerMode ? 9 : 6,
+        reducedMotion ? 45 : lowPowerMode ? 65 : 100,
+      );
     };
 
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isInView = entries[0]?.isIntersecting ?? true;
+      },
+      { threshold: 0.08 },
+    );
+
+    const handleVisibilityChange = () => {
+      isDocumentVisible = !document.hidden;
+    };
+
+    updatePerformanceMode();
     resize();
-    render();
+    observer.observe(parent);
+    render(0);
     window.addEventListener("resize", resize);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    const cleanupFns: Array<() => void> = [];
+    const registerMediaListener = (query: MediaQueryList) => {
+      const legacyQuery = query as MediaQueryList & {
+        addListener?: (listener: (event: MediaQueryListEvent) => void) => void;
+        removeListener?: (
+          listener: (event: MediaQueryListEvent) => void,
+        ) => void;
+      };
+
+      if (typeof query.addEventListener === "function") {
+        query.addEventListener("change", updatePerformanceMode);
+        cleanupFns.push(() =>
+          query.removeEventListener("change", updatePerformanceMode),
+        );
+        return;
+      }
+
+      if (typeof legacyQuery.addListener === "function") {
+        legacyQuery.addListener(updatePerformanceMode);
+        cleanupFns.push(() =>
+          legacyQuery.removeListener?.(updatePerformanceMode),
+        );
+      }
+    };
+
+    registerMediaListener(reducedMotionQuery);
+    registerMediaListener(coarsePointerQuery);
+    registerMediaListener(mobileViewportQuery);
 
     return () => {
       window.cancelAnimationFrame(frame);
+      observer.disconnect();
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      for (const cleanup of cleanupFns) cleanup();
     };
   }, [backgroundFill, blur, colors, noise, speed, waveOpacity, waveWidth]);
 
@@ -103,7 +187,7 @@ export function WavyBackground({
       <canvas
         ref={canvasRef}
         className="absolute inset-0 z-0 h-full w-full"
-        style={isSafari ? { filter: `blur(${blur}px)` } : undefined}
+        style={{ filter: `blur(${blur}px)` }}
       />
       <div className={cn("relative z-10", className)}>{children}</div>
     </div>

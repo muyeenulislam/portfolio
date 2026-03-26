@@ -1,7 +1,7 @@
 "use client";
 
 import type { CSSProperties, HTMLAttributes, MouseEvent } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/cn";
 
@@ -18,15 +18,44 @@ export function GlassCard({
   cardHoverEffect = false,
   className,
   onMouseMove,
+  style,
   ...props
 }: GlassCardProps) {
-  const [mouse, setMouse] = useState({ x: "50%", y: "50%" });
+  const [supportsHover, setSupportsHover] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const legacyMediaQuery = mediaQuery as MediaQueryList & {
+      addListener?: (listener: (event: MediaQueryListEvent) => void) => void;
+      removeListener?: (listener: (event: MediaQueryListEvent) => void) => void;
+    };
+    const updateSupport = () => setSupportsHover(mediaQuery.matches);
+    updateSupport();
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", updateSupport);
+      return () => mediaQuery.removeEventListener("change", updateSupport);
+    }
+
+    if (typeof legacyMediaQuery.addListener === "function") {
+      legacyMediaQuery.addListener(updateSupport);
+      return () => legacyMediaQuery.removeListener?.(updateSupport);
+    }
+
+    return undefined;
+  }, []);
 
   function handleMouseMove(event: MouseEvent<HTMLDivElement>) {
+    if (!cardHoverEffect || !supportsHover) {
+      onMouseMove?.(event);
+      return;
+    }
+
     const bounds = event.currentTarget.getBoundingClientRect();
     const x = `${event.clientX - bounds.left}px`;
     const y = `${event.clientY - bounds.top}px`;
-    setMouse({ x, y });
+    event.currentTarget.style.setProperty("--mx", x);
+    event.currentTarget.style.setProperty("--my", y);
     onMouseMove?.(event);
   }
 
@@ -38,11 +67,12 @@ export function GlassCard({
           "transition-all duration-350 ease-out hover:-translate-y-1.5 hover:border-brand-200/35 hover:shadow-[0_1.5625rem_3.75rem_rgba(0,0,0,0.45),inset_0_0.0625rem_0_rgba(176,228,204,0.25)]",
         className,
       )}
-      onMouseMove={handleMouseMove}
+      onMouseMove={cardHoverEffect ? handleMouseMove : onMouseMove}
       style={
         {
-          "--mx": mouse.x,
-          "--my": mouse.y,
+          ...style,
+          "--mx": "50%",
+          "--my": "50%",
         } as GlowStyle
       }
       {...props}

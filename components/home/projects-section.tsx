@@ -70,6 +70,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                   alt={`${project.name} preview`}
                   height={200}
                   width={400}
+                  sizes="(max-width: 640px) 90vw, 20rem"
                   className="h-40 w-full object-cover transition duration-350 group-hover:scale-110"
                 />
                 <Link
